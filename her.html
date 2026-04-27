@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  font-family: Arial;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+p {
+  font-size: 20px;
+  width: 70%;
+  margin: auto;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  background: white;
+  color: #ff4d6d;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: #ff4d6d;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  color: red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1 id="title">Hey Sweet❤️ </h1>
+  <p id="text"></p>
+
+  <button onclick="start()">Click Me 💌</button>
+
+  <div id="surprise" class="hidden">
+    <h1>💖 I Love You 💖</h1>
+    <p>You are the best thing that ever happened to me.</p>
+    <p>I’m lucky to have you in my life ❤️</p>
+  </div>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="tum-ho-to.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let message = "From the moment I met you, everything became beautiful... ❤️";
+let i = 0;
+
+function start() {
+  // play music
+  document.getElementById("music").play();
+
+  // hide button
+  document.querySelector("button").style.display = "none";
+
+  // start typing
+  typeEffect();
+
+  // hearts animation
+  createHearts();
+
+  // show surprise after delay
+  setTimeout(() => {
+    document.getElementById("surprise").classList.remove("hidden");
+  }, 6000);
+}
+
+function typeEffect() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeEffect, 50);
+  }
+}
+
+function createHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
